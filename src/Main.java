@@ -56,31 +56,39 @@ public class Main {
     //Bubble sort method
     public static void bubbleSort(int[] arr) {
         int temp;
+        //First optimization
         //arr.length - 1 -> At first iteration we're pushing the biggest element to the end,
         //So we don't need to check it again
+
         for (int i = 0; i < arr.length - 1; i++) {
+            //Second optimization is in this boolean isSwapped,
+            //If we didn't change anything, that means that array is already sorted, so we are breaking our loop
+            boolean isSwapped = false;
             for (int x = 0; x < arr.length - 1; x++) {
                 if (arr[x] > arr[x + 1]) {
                     //Swapping
                     temp = arr[x];
                     arr[x] = arr[x + 1];
                     arr[x + 1] = temp;
+
+                    isSwapped = true;
                 }
             }
+            if(!isSwapped) break;
         }
     }
 
-    public static int[] userChoiceArrayGenerator(int length, String output){
+    public static int[] userChoiceArrayGenerator(int length, String output) {
 
         System.out.print(output);
-        if(sc.nextLine().equalsIgnoreCase("y"))
+        if (sc.nextLine().equalsIgnoreCase("y"))
             return generateArray(length);
         else
             return generateUserArray(length);
 
     }
 
-    public static boolean getUserBool(String output){
+    public static boolean getUserBool(String output) {
         System.out.print(output);
         return sc.nextLine().equalsIgnoreCase("y");
     }
@@ -106,6 +114,6 @@ public class Main {
             printArray(array);
 
             //Ask if user wants to repeat (from #1).
-        }while (getUserBool("Do you want to continue? (Y/N): "));
+        } while (getUserBool("Do you want to continue? (Y/N): "));
     }
 }
